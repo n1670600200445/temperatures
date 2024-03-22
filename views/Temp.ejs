@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/5/litera/bootstrap.css">
+    <title>Temperature current</title>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #93B9DD;
+            position:fixed;
+            width: 100%;
+            top: 0;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #78A3D4;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0; 
+        }
+
+        .container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 30px;
+            border-radius: 5px;
+            text-align: center;
+            flex: 1;
+            height: 200px;
+        }
+
+        .btn {
+            width: auto;
+            height: 80px;
+            padding: 10px 20px;
+            text-align: center;
+            background-image: linear-gradient(to right, #007bff, #38a3f1);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<header>
+    <ul>
+        <li><a href="/Temp">ค่าอุปกรณ์ปัจจุบัน</a></li>
+        <li><a href="/Table">ค่าทั้งหมด</a></li>
+        <li><a href="/Pixel">Pixel64</a></li>
+    </ul>
+</header>
+<body>
+<div style="display: flex; justify-content: center;">
+    <h1 style="font-size: 60px;">ค่าอุปกรณ์ปัจจุบัน</h1>
+</div> 
+<div class="container">     
+    <div class="card">
+        <p style="font-size: 30px;">ค่า max_temperature</p> 
+        <% if (data.max > 30) { %>
+            <p style="font-size: 30px; font-family: Arial; color: red;"><%= data.max %></p>
+        <% } else if (data.max < 24) { %>
+            <p style="font-size: 30px; font-family: Arial; color: blue;"><%= data.max %></p>
+        <% } else { %>
+            <p style="font-size: 30px; font-family: Arial; color: green;"><%= data.max %></p>
+        <% } %>
+    </div>
+    <div class="card">
+        <p style="font-size: 30px;">ค่า min_temperature</p> 
+        <% if (data.min < 24) { %>
+            <p style="font-size: 30px; font-family: Arial; color: blue;"><%= data.min %></p>
+        <% } else if (data.min > 30) { %>
+            <p style="font-size: 30px; font-family: Arial; color: red;"><%= data.min %></p>
+        <% } else { %>
+            <p style="font-size: 30px; font-family: Arial; color: green;"><%= data.min %></p>
+        <% } %>
+    </div>  
+</div>
+<a href="https://nertnapha20.grafana.net/public-dashboards/e83f5f585a6a40dab833da382b651c5a" class="btn">
+    ดูค่า Grafana
+</a>
+</body>
+</html>
